@@ -81,8 +81,7 @@ function checkForMatch() {
             stopTimer();
             setTimeout(() => {
                 const elapsedTime = Math.floor((new Date() - startTime) / 1000);
-                scoreElement.textContent = `Score: ${elapsedTime}s`;
-                scoreElement.style.display = 'block'; // Display the score in the center of the screen
+                showScore(elapsedTime);
             }, 500);
         }
     } else {
@@ -96,6 +95,12 @@ function checkForMatch() {
     }
 }
 
+function showScore(elapsedTime) {
+    gameBoard.style.display = 'none';  // Hide the game board
+    scoreElement.textContent = `Score: ${elapsedTime}s`;
+    scoreElement.style.display = 'flex'; // Show the score card
+}
+
 resetButton.addEventListener('click', () => {
     shuffleCards();
     createBoard();
@@ -103,6 +108,8 @@ resetButton.addEventListener('click', () => {
     matchedCards = [];
     stopTimer(); // Stop the timer when the game is reset
     timerElement.textContent = 'Time: 0s';
+    gameBoard.style.display = 'flex'; // Ensure the game board is visible
+    scoreElement.style.display = 'none';  // Hide the score card
 });
 
 shuffleCards();
